@@ -1,143 +1,111 @@
+var Controller = {
+	save: function(req, res) {
+		model.save(function(err, data) {
+			if (err) {
+				console.log('Erro', err);
+				msg = 'Erro' + err;
+			}
+			console.log('Cerveja Inserida', data);
+			msg = 'Cerveja Inserida' + data;
+		});
+		res.end(msg);
+	}
+}
+
 var http = require('http');
 
+// Bring Mongoose into the app
 var mongoose = require('mongoose');
+
+// Build the connection string
 mongoose.connect('mongodb://localhost/pos-unoesc');
 
 var db = mongoose.connection;
 
+// When successfully connected
+db.on('connected', function() {
+	console.log('Mongoose default connection open to ');
+});
+
+// If the connection throws an error
 db.on('error', function(err) {
-	console.log('Erro de conexão.', err);
+	console.log('Mongoose default connection error: ' + err);
 });
 
-db.open('open', function(){
-	console.log('Conexão aberta.');
+// When the connection is disconnected
+db.on('disconnected', function() {
+	console.log('Mongoose default connection disconnected');
 });
 
-db.open('connected', function(){
-	console.log('Conectado');
-});
-
-db.open('disconnected', function(){
-	console.log('Desconectado');
+// When the connection is disconnected
+db.on('open', function() {
+	console.log('Mongoose default connection is open');
 });
 
 var Schema = mongoose.Schema;
 
 var json_schema = {
-	name: {type: String, default: ''}
-	, description: {type: String, default: ''}
-	, alcohol: {type: Number, min: 0}
-	, price: {type: Number, min: 0}
-	, category: {type: String, default: ''}
+	name: {
+		type: String,
+		default: ''
+	},
+	description: {
+		type: String,
+		default: ''
+	},
+	alcohol: {
+		type: Number,
+		min: 0
+	},
+	price: {
+		type: Number,
+		min: 0
+	},
+	category: {
+		type: String,
+		default: ''
+	}
 }
 
 var BeerSchema = new Schema(json_schema);
 
 var Beer = mongoose.model('Beer', BeerSchema);
 
-var Controller = {
-	create: function(req, res){}
-	retrieve: function(req, res){}
-	update: function(req, res){}
-	remove: function(req, res){}
-};
+var msg = '';
 
+http.createServer(function(req, res) {
 
-http.createServer(function (req, res) {
+	var url = req.url;
 
-console.log('URL: ', req.URL);
-var url = req.URL;
+	res.writeHead(200, {
+		'Content-Type': 'text/plain'
+	});
 
-res.writeHead(200, {'Content-Type': 'application/json'});
-  var dados = {
-	name: 'Skol',
-	description: 'Mijo de rato',
-	alcohol: 4.5,
-	price: 3.0,
-	category: 'pilsen'
-};
+	var dados = {
+		name: 'Skol',
+		description: 'Desce redondo',
+		alcohol: 10,
+		price: 12,
+		category: 'pilsen'
+	};
+	var model = new Beer(dados);	
 
-var model = new Beer(dados), msg = '';
-
-switch(url){
-case '/create':
-
-
-	model.save(function(err, data) {
-	if (err) {
-		console.log('Erro: ', err);
-		msg = 'Erro: ' + err;
-	} else {
-	console.log('Cerveja inserida', data);
-	msg = 'Cerveja inserida: ' + data;
+	switch (url) {
+		case '/api/beers/create':
+			Controller.create(req, res);
+			break;
+		case '/api/beers/save':
+			Controller.save(req, res);
+			break;
+		case '/api/beers/retrieve':
+			Controller.update(req, res);
+			break;
+		case '/api/beers/delete':
+			Controller.delete(req, res);
+			break;
+		default:
+			res.end('erro url', url);
 	}
-		});
 
-break;
-
-case '/retrieve':	
-
-Beer.find(query, function(err, data) {
-	if (err){
-		console.log('Erro: ', err);
-	}
-	else{
-		console.log('Listagem: ', data);
-	}
-	process.exit(0);
-});
-
-break;
-
-	case '/update':
-	
-
- Beer = mongoose.model('Beer', BeerSchema), query = {name: /skol/i};
-
-var mod = {
-	name: 'Brahma',
-	alcohol: 4,
-	price: 6,
-	category: 'pilsen'
-};
-
-var optional = {
-	upsert: false,
-	multi: false
-};
-
-Beer.update(query, mod,optional, function(err, data) {
-	if (err){
-		console.log('Erro: ', err);
-	}else {
-		console.log('Cervejas atualizadas com sucesso', data);
-	}
-});
-
-break;
-
-	case 'delete':
-
-	
-
- Beer = mongoose.model('Beer', BeerSchema), query = {name: /skol/i};
-
-Beer.remove(query, function(err, data) {
-	if (err){
-		console.log(err);
-	}else {
-		console.log('Cerveja deletada com sucesso, quantidade: ', data.result);
-	}
-});
-
-break;
-
-	default:
-	res.end('Rota não encontrada');
-	break;
-}
-  res.end(msg);
 }).listen(3000);
-  
-
-console.log('Server running at http://1localhost:3000/');
+console.log('Server running at http://localhost:3000/');
