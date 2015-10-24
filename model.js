@@ -1,3 +1,4 @@
+//Modularizar o código - criar model separadamente
 var Schema = mongoose.Schema;
 
 var json_schema = {
