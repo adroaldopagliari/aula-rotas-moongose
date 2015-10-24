@@ -1,0 +1,59 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/nodejs', '/usr/bin/npm', 'i', '--save', 'moongose' ]
+2 info using npm@1.3.10
+3 info using node@v0.10.25
+4 warn package.json aula-mongoose@0.0.0 No repository field.
+5 warn package.json aula-mongoose@0.0.0 No README data
+6 verbose readDependencies using package.json deps
+7 verbose cache add [ 'moongose', null ]
+8 verbose cache add name=undefined spec="moongose" args=["moongose",null]
+9 verbose parsed url { protocol: null,
+9 verbose parsed url   slashes: null,
+9 verbose parsed url   auth: null,
+9 verbose parsed url   host: null,
+9 verbose parsed url   port: null,
+9 verbose parsed url   hostname: null,
+9 verbose parsed url   hash: null,
+9 verbose parsed url   search: null,
+9 verbose parsed url   query: null,
+9 verbose parsed url   pathname: 'moongose',
+9 verbose parsed url   path: 'moongose',
+9 verbose parsed url   href: 'moongose' }
+10 silly lockFile 61a5aea2-moongose moongose
+11 verbose lock moongose /home/apadawan/.npm/61a5aea2-moongose.lock
+12 silly lockFile 61a5aea2-moongose moongose
+13 silly lockFile 61a5aea2-moongose moongose
+14 verbose addNamed [ 'moongose', '' ]
+15 verbose addNamed [ null, '*' ]
+16 silly lockFile 63fea7b6-moongose moongose@
+17 verbose lock moongose@ /home/apadawan/.npm/63fea7b6-moongose.lock
+18 silly addNameRange { name: 'moongose', range: '*', hasData: false }
+19 verbose url raw moongose
+20 verbose url resolving [ 'https://registry.npmjs.org/', './moongose' ]
+21 verbose url resolved https://registry.npmjs.org/moongose
+22 info trying registry request attempt 1 at 22:11:59
+23 http GET https://registry.npmjs.org/moongose
+24 info retry will retry, error on last attempt: Error: getaddrinfo ENOTFOUND
+25 info trying registry request attempt 2 at 22:12:09
+26 http GET https://registry.npmjs.org/moongose
+27 info retry will retry, error on last attempt: Error: getaddrinfo ENOTFOUND
+28 info trying registry request attempt 3 at 22:13:09
+29 http GET https://registry.npmjs.org/moongose
+30 silly lockFile 63fea7b6-moongose moongose@
+31 silly lockFile 63fea7b6-moongose moongose@
+32 error network getaddrinfo ENOTFOUND
+32 error network This is most likely not a problem with npm itself
+32 error network and is related to network connectivity.
+32 error network In most cases you are behind a proxy or have bad network settings.
+32 error network
+32 error network If you are behind a proxy, please make sure that the
+32 error network 'proxy' config is set properly.  See: 'npm help config'
+33 error System Linux 3.16.0-38-generic
+34 error command "/usr/bin/nodejs" "/usr/bin/npm" "i" "--save" "moongose"
+35 error cwd /home/apadawan/Documentos/WebMob/Javascript - Suissa/aula-mongoose
+36 error node -v v0.10.25
+37 error npm -v 1.3.10
+38 error syscall getaddrinfo
+39 error code ENOTFOUND
+40 error errno ENOTFOUND
+41 verbose exit [ 1, true ]

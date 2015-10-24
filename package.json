@@ -1,0 +1,19 @@
+{
+  "name": "aula-mongoose",
+  "version": "0.0.0",
+  "description": "Aula sobre Mongoose",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "MongoDb",
+    "nodeJS",
+    "Mongoose"
+  ],
+  "author": "Adroaldo Pagliari",
+  "license": "wtfpl",
+  "dependencies": {
+    "mongoose": "^4.2.2"
+  }
+}
